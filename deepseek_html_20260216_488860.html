@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Rohit Fish Store – Fresh Fish Nepal</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Inter + Playfair for premium touch) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f6fbfe;
+            color: #033b4a;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,119,140,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            color: #007c92;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #013b44;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #023b45;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00a8c5;
+        }
+
+        .cart-icon {
+            background: #def3f8;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #007387;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #c5eaf3;
+        }
+
+        .cart-icon i {
+            margin-right: 6px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #007387;
+            cursor: pointer;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(97deg, #c9edf5 0%, #e2f5fa 100%);
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            padding: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            flex: 1 1 300px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            color: #01363f;
+            line-height: 1.2;
+            animation: slideUp 0.8s ease;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            margin: 0.8rem 0 1.5rem;
+            color: #005f70;
+            font-weight: 300;
+            animation: slideUp 0.8s ease 0.1s both;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: slideUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #007c92;
+            color: white;
+            box-shadow: 0 8px 18px #9fd5e3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            background: #016b7e;
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #007c92;
+            color: #007c92;
+        }
+
+        .btn-outline:hover {
+            background: #007c92;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            background: url('https://images.pexels.com/photos/34115/grilled-fish-fillet-seafood-grilled.jpg?auto=compress&cs=tinysrgb&w=600') center/cover;
+            min-height: 280px;
+            border-radius: 40px;
+            box-shadow: 0 20px 25px -10px #00738760;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* featured section */
+        .section-title {
+            font-size: 2.2rem;
+            color: #01363f;
+            margin: 2.5rem 0 1.5rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background: #00b4d9;
+            display: block;
+            margin-top: 5px;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .section-title:hover:after {
+            width: 120px;
+        }
+
+        .fish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .fish-card {
+            background: white;
+            border-radius: 30px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            box-shadow: 0 10px 20px #b3dfea50;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fish-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,124,146,0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .fish-card:hover::before {
+            opacity: 1;
+        }
+
+        .fish-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 28px #7fc9db;
+        }
+
+        .fish-card img {
+            width: 100%;
+            aspect-ratio: 1/0.9;
+            object-fit: cover;
+            border-radius: 30px;
+            background: #caeef9;
+            transition: transform 0.3s;
+        }
+
+        .fish-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .fish-name {
+            font-size: 1.3rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .price {
+            font-weight: 700;
+            color: #016675;
+            margin-bottom: 0.7rem;
+        }
+
+        .qty-add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+        }
+
+        .qty-selector {
+            width: 60px;
+            padding: 0.4rem;
+            border: 1px solid #b9e2ec;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background: none;
+            border: none;
+            background: #def3f8;
+            padding: 0.45rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #005f70;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #b9e7f2;
+            transform: scale(1.05);
+        }
+
+        /* why choose us */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .why-item {
+            background: white;
+            border-radius: 40px;
+            padding: 1.8rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #014957;
+            border: 1px solid #d1f0f8;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .why-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,124,146,0.1);
+            border-color: #007c92;
+        }
+
+        .why-item i {
+            font-size: 2.2rem;
+            color: #00abc9;
+            margin-bottom: 0.6rem;
+            transition: transform 0.3s;
+        }
+
+        .why-item:hover i {
+            transform: scale(1.2);
+        }
+
+        /* page sections general */
+        .page-section {
+            padding: 2rem 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active-section {
+            display: block;
+        }
+
+        /* shop grid bigger */
+        .cat-title {
+            font-size: 1.9rem;
+            margin: 2rem 0 1rem;
+            color: #01505f;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+
+        /* booking / payment / about / contact forms */
+        .form-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: 0 15px 25px #bee4ee;
+            max-width: 700px;
+            margin: 2rem auto;
+            transition: transform 0.3s;
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px #aad4e0;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #015e71;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid #cdecf5;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: #f2fcff;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007c92;
+            box-shadow: 0 0 0 3px rgba(0,124,146,0.1);
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #e4f4f9;
+            padding: 1rem;
+            border-radius: 50px;
+            margin: 1rem 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            background: #d3ecf5;
+            transform: translateX(5px);
+        }
+
+        .payment-option img {
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .order-summary {
+            background: #c9edf5;
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0,124,146,0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(0,124,146,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,124,146,0); }
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20b859;
+            transform: scale(1.05);
+        }
+
+        .map-placeholder {
+            background: #bee1ea;
+            height: 200px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #015563;
+            margin: 1.5rem 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .map-placeholder:hover {
+            transform: scale(1.02);
+            background: #aad5e2;
+        }
+
+        .footer {
+            background: #02262e;
+            color: whitesmoke;
+            padding: 2rem 0;
+            border-radius: 3rem 3rem 0 0;
+            margin-top: 4rem;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .social a {
+            color: white;
+            margin-right: 1.2rem;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .social a:hover {
+            color: #00b4d9;
+            transform: translateY(-3px);
+        }
+
+        .small-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* mobile */
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* cart badge updates */
+        .cart-count {
+            background: #007c92;
+            color: white;
+            border-radius: 50%;
+            padding: 0.1rem 0.5rem;
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* order tracking bonus */
+        .tracking-card {
+            background: #e0f3f9;
+            border-radius: 50px;
+            padding: 1.3rem;
+            text-align: center;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+
+        .tracking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,124,146,0.2);
+        }
+
+        /* cart modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-modal.show {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .cart-items {
+            margin: 1.5rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e0f0f5;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #007c92;
+            margin: 1rem 0;
+        }
+
+        .close-cart {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007c92;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* success message */
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">Rohit <span>Fish Store</span></div>
+            <div class="nav-links" id="navLinks">
+                <a href="#" data-page="home" class="active">Home</a>
+                <a href="#" data-page="shop">Shop</a>
+                <a href="#" data-page="booking">Booking</a>
+                <a href="#" data-page="about">About</a>
+                <a href="#" data-page="contact">Contact</a>
+                <span class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> <span id="cartTotal">0</span> NPR</span>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="hideCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be displayed here -->
+            </div>
+            <div class="cart-total" id="modalCartTotal">Total: NPR 0</div>
+            <button class="btn btn-primary" style="width:100%;" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- PAGE: HOME (visible by default) -->
+    <section id="home" class="page-section active-section">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1>Rohit Fish Store</h1>
+                    <div class="hero-tagline">Your Fresh Fish Destination.<br>Fresh Fish Delivered to Your Doorstep</div>
+                    <div class="btn-group">
+                        <a href="#" data-page="shop" class="btn btn-primary">Order Now</a>
+                        <a href="#" data-page="booking" class="btn btn-outline">Book Fresh Fish</a>
+                    </div>
+                </div>
+                <div class="hero-image"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Featured Fish -->
+            <h2 class="section-title">Featured Freshwater</h2>
+            <div class="fish-grid">
+                <div class="fish-card"><img src="https://images.pexels.com/photos/3058870/pexels-photo-3058870.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Rohu"><div class="fish-name">Rohu</div><div class="price">NPR 550/kg</div></div>
+                <div class="fish-card"><img src="https://images.pexels.com/photos/4161655/pexels-photo-4161655.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Catla"><div class="fish-name">Catla</div><div class="price">NPR 480/kg</div></div>
+                <div class="fish-card"><img src="https://images.pexels.com/photos/5663436/pexels-photo-5663436.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Grass Carp"><div class="fish-name">Grass Carp</div><div class="price">NPR 400/kg</div></div>
+                <div class="fish-card"><img src="https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Pangasius"><div class="fish-name">Pangasius</div><div class="price">NPR 350/kg</div></div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="why-grid">
+                <div class="why-item"><i class="fas fa-fish"></i>Freshness Guaranteed</div>
+                <div class="why-item"><i class="fas fa-truck"></i>Daily Supply</div>
+                <div class="why-item"><i class="fas fa-hand-holding-heart"></i>Hygienic Cutting</div>
+                <div class="why-item"><i class="fas fa-bicycle"></i>Fast Delivery</div>
+            </div>
+            
+            <!-- bonus order tracking -->
+            <div class="tracking-card">
+                <i class="fas fa-map-marked-alt" style="font-size:2rem; color:#007c92;"></i>
+                <h3>Track Your Order</h3>
+                <p>Enter your order ID to track delivery</p>
+                <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+                    <input type="text" placeholder="Order ID" class="form-control" style="flex:1;">
+                    <button class="btn btn-primary" onclick="trackOrder()">Track</button>
+                </div>
+                <div id="trackingResult" style="margin-top:1rem;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: SHOP -->
+    <section id="shop" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Shop by category</h2>
+            <!-- A. Fresh River Fish -->
+            <h3 class="cat-title"><i class="fas fa-water" style="color:#007c92;"></i> Fresh River Fish</h3>
+            <div class="product-list" id="riverFish"></div>
+            <!-- B. Sea Fish -->
+            <h3 class="cat-title"><i class="fas fa-ship"></i> Sea Fish</h3>
+            <div class="product-list" id="seaFish"></div>
+            <!-- C. Prawns & Seafood -->
+            <h3 class="cat-title"><i class="fas fa-shrimp"></i> Prawns & Seafood</h3>
+            <div class="product-list" id="seafoodList"></div>
+        </div>
+    </section>
+
+    <!-- PAGE: BOOKING + PAYMENT (combined flow) -->
+    <section id="booking" class="page-section">
+        <div class="container form-card">
+            <h2>📅 Book Fresh Fish</h2>
+            <div class="form-group">
+                <label>Fish type</label>
+                <select id="bookFishType" class="form-control">
+                    <option value="Rohu" data-price="550">Rohu (NPR 550/kg)</option>
+                    <option value="Catla" data-price="480">Catla (NPR 480/kg)</option>
+                    <option value="Surmai" data-price="1200">Surmai (NPR 1200/kg)</option>
+                    <option value="Prawns" data-price="1500">Prawns (NPR 1500/kg)</option>
+                    <option value="Pomfret" data-price="950">Pomfret (NPR 950/kg)</option>
+                    <option value="Crab" data-price="1300">Crab (NPR 1300/kg)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Quantity (kg)</label>
+                <input type="number" id="bookQty" value="1" min="0.5" step="0.5" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" class="form-control" placeholder="Rohit Sharma">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="phone" class="form-control" placeholder="98XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input type="text" id="address" class="form-control" placeholder="Kathmandu">
+            </div>
+            <div class="form-group">
+                <label>Preferred Delivery Date</label>
+                <input type="date" id="delDate" class="form-control" min="<?php echo date('Y-m-d'); ?>">
+            </div>
+            
+            <!-- Order summary -->
+            <div class="order-summary" id="bookSum">
+                <h3>Order Summary</h3>
+                <p id="selectedFish">Fish: Rohu</p>
+                <p id="selectedQty">Quantity: 1 kg</p>
+                <p id="selectedTotal">Total: NPR 550</p>
+            </div>
+
+            <!-- PAYMENT OPTIONS -->
+            <h3>Payment Method</h3>
+            <div class="payment-option" onclick="selectPayment('cod')">
+                <input type="radio" name="payment" id="codRadio" checked> 
+                <span>Cash on Delivery (COD)</span>
+            </div>
+            <div class="payment-option" onclick="selectPayment('esewa')">
+                <input type="radio" name="payment" id="esewaRadio"> 
+                <img src="https://esewa.com.np/common/images/esewa_logo.png" alt="eSewa" style="height:30px;">
+                <span>Online via eSewa</span>
+            </div>
+            
+            <button class="btn btn-primary" style="width:100%;" onclick="confirmBooking()" id="confirmBtn">
+                Confirm Order
+            </button>
+            <p class="small-note" style="margin-top:1rem;">
+                <i class="fas fa-lock"></i> Secure checkout. You'll receive confirmation after success.
+            </p>
+        </div>
+    </section>
+
+    <!-- PAGE: ABOUT US -->
+    <section id="about" class="page-section">
+        <div class="container form-card">
+            <h2>🇳🇵 About Rohit Fish Store</h2>
+            <p style="font-size:1.2rem; margin:1rem 0;">
+                We bring the freshest catch from Nepal's rivers and the sea to your table. 
+                Founded with the mission to deliver <strong>hygienic, high-quality fish daily</strong>.
+            </p>
+            <p>
+                Our team ensures every piece is cut in a clean environment, packed with ice, 
+                and rushed to your doorstep. We believe in transparency, fair price, and 
+                customer satisfaction above all.
+            </p>
+            <div style="background:#e0f0f5; border-radius:40px; padding:1.5rem;margin-top:1.5rem;">
+                <i class="fas fa-check-circle" style="color:#007c92;"></i> 
+                <strong>Mission:</strong> Fresh, hygienic fish for every Nepali household.
+            </div>
+            
+            <div style="margin-top:2rem;">
+                <h3>Our Values</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                    <div style="text-align:center;"><i class="fas fa-heart" style="color:#007c92;"></i> Quality First</div>
+                    <div style="text-align:center;"><i class="fas fa-clock" style="color:#007c92;"></i> Daily Fresh</div>
+                    <div style="text-align:center;"><i class="fas fa-hand-sparkles" style="color:#007c92;"></i> Hygienic</div>
+                    <div style="text-align:center;"><i class="fas fa-smile" style="color:#007c92;"></i> Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: CONTACT -->
+    <section id="contact" class="page-section">
+        <div class="container form-card">
+            <h2>Get in touch</h2>
+            <p><i class="fas fa-phone-alt"></i> +977 9812345678</p>
+            <p><i class="fas fa-envelope"></i> info@rohitfishstore.com.np</p>
+            <a href="https://wa.me/9779812345678" class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp us
+            </a>
+            
+            <div class="map-placeholder" onclick="window.open('https://maps.google.com/?q=Kathmandu+Nepal')">
+                <i class="fas fa-map-pin"></i> Google Map: New Baneshwor, Kathmandu (Click to open)
+            </div>
+            
+            <form onsubmit="sendContact(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" id="contactName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="contactEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="3" class="form-control" id="contactMessage" required style="border-radius:30px;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="contactBtn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <span class="logo">Rohit Fish Store</span><br>
+                Fresh since 2015
+            </div>
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div>
+                © 2025, all rights reserved.<br>
+                NPR prices inclusive.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart array to store items
+        let cartItems = [];
+        let cartTotal = 0;
+
+        // product database
+        const products = [
+            { cat:"river", name:"Rohu", price:550, img:"https://images.pexels.com/photos/3058870/pexels-photo-3058870.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"river", name:"Catla", price:480, img:"https://images.pexels.com/photos/4161655/pexels-photo-4161655.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"river", name:"Grass Carp", price:400, img:"https://images.pexels.com/photos/5663436/pexels-photo-5663436.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"river", name:"Pangasius", price:350, img:"https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"sea", name:"Surmai", price:1200, img:"https://images.pexels.com/photos/4623945/pexels-photo-4623945.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"sea", name:"Pomfret", price:950, img:"https://images.pexels.com/photos/699521/pexels-photo-699521.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"sea", name:"Mackerel", price:620, img:"https://images.pexels.com/photos/4623940/pexels-photo-4623940.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"prawn", name:"Fresh Prawns", price:1500, img:"https://images.pexels.com/photos/3329694/pexels-photo-3329694.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"prawn", name:"Crab", price:1300, img:"https://images.pexels.com/photos/5845009/pexels-photo-5845009.jpeg?auto=compress&cs=tinysrgb&w=400" },
+            { cat:"prawn", name:"Dry Fish", price:800, img:"https://images.pexels.com/photos/3649383/pexels-photo-3649383.jpeg?auto=compress&cs=tinysrgb&w=400" }
+        ];
+
+        // render shop
+        function renderShop() {
+            let riverHtml = '', seaHtml = '', prawnHtml = '';
+            products.forEach(p => {
+                const card = `<div class="fish-card">
+                    <img src="${p.img}" alt="${p.name}" loading="lazy">
+                    <div class="fish-name">${p.name}</div>
+                    <div class="price">NPR ${p.price}/kg</div>
+                    <div class="qty-add">
+                        <input type="number" min="0.5" step="0.5" value="1" class="qty-selector" id="qty-${p.name.replace(/\s+/g, '')}">
+                        <button class="add-btn" onclick="addToCart('${p.name}', ${p.price})"><i class="fas fa-cart-plus"></i> Add</button>
+                    </div>
+                </div>`;
+                if (p.cat === 'river') riverHtml += card;
+                else if (p.cat === 'sea') seaHtml += card;
+                else prawnHtml += card;
+            });
+            document.getElementById('riverFish').innerHTML = riverHtml;
+            document.getElementById('seaFish').innerHTML = seaHtml;
+            document.getElementById('seafoodList').innerHTML = prawnHtml;
+        }
+        renderShop();
+
+        // Add to cart function
+        function addToCart(name, price) {
+            const qtyInput = document.getElementById(`qty-${name.replace(/\s+/g, '')}`);
+            const qty = qtyInput ? parseFloat(qtyInput.value) : 1;
+            
+            // Add to cart array
+            cartItems.push({
+                name: name,
+                price: price,
+                quantity: qty,
+                total: price * qty
+            });
+            
+            // Update total
+            cartTotal = cartItems.reduce((sum, item) => sum + item.total, 0);
+            document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
+            
+            // Show success message
+            showNotification(`Added ${qty}kg ${name} to cart!`);
+            
+            // Update cart modal if open
+            if (document.getElementById('cartModal').classList.contains('show')) {
+                displayCartItems();
+            }
+        }
+
+        // Display cart items in modal
+        function displayCartItems() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            if (cartItems.length === 0) {
+                cartItemsDiv.innerHTML = '<p style="text-align:center;">Your cart is empty</p>';
+            } else {
+                let html = '';
+                cartItems.forEach((item, index) => {
+                    html += `
+                        <div class="cart-item">
+                            <div>
+                                <strong>${item.name}</strong><br>
+                                ${item.quantity}kg × NPR ${item.price}
+                            </div>
+                            <div>
+                                NPR ${item.total}
+                                <i class="fas fa-trash" style="color:#ff4444; margin-left:10px; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                            </div>
+                        </div>
+                    `;
+                });
+                cartItemsDiv.innerHTML = html;
+            }
+            document.getElementById('modalCartTotal').innerText = `Total: NPR ${cartTotal.toFixed(2)}`;
+        }
+
+        // Remove from cart
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            cartTotal = cartItems.reduce((sum, item) => sum + item.total, 0);
+            document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
+            displayCartItems();
+            showNotification('Item removed from cart');
+        }
+
+        // Show cart modal
+        function showCart() {
+            displayCartItems();
+            document.getElementById('cartModal').classList.add('show');
+        }
+
+        // Hide cart modal
+        function hideCart() {
+            document.getElementById('cartModal').classList.remove('show');
+        }
+
+        // Checkout
+        function checkout() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            hideCart();
+            // Navigate to booking page
+            document.querySelector('[data-page="booking"]').click();
+            // Pre-fill booking with cart items (simplified)
+            alert('Please complete your booking details below');
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 1rem;
+                border-radius: 50px;
+                z-index: 1001;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Booking summary update
+        function updateBookSum() {
+            const fishSelect = document.getElementById('bookFishType');
+            const selectedOption = fishSelect.options[fishSelect.selectedIndex];
+            const price = parseFloat(selectedOption.dataset.price) || 550;
+            const qty = parseFloat(document.getElementById('bookQty').value) || 1;
+            const total = price * qty;
+            
+            document.getElementById('selectedFish').innerHTML = `Fish: ${selectedOption.value}`;
+            document.getElementById('selectedQty').innerHTML = `Quantity: ${qty} kg`;
+            document.getElementById('selectedTotal').innerHTML = `Total: NPR ${total}`;
+        }
+
+        // Select payment method
+        function selectPayment(method) {
+            if (method === 'cod') {
+                document.getElementById('codRadio').checked = true;
+            } else {
+                document.getElementById('esewaRadio').checked = true;
+            }
+        }
+
+        // Confirm booking
+        function confirmBooking() {
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const date = document.getElementById('delDate').value;
+            const fish = document.getElementById('bookFishType').value;
+            const qty = document.getElementById('bookQty').value;
+            const payment = document.querySelector('input[name="payment"]:checked').nextSibling.textContent;
+            
+            if (!name || !phone || !address || !date) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Show loading state
+            const btn = document.getElementById('confirmBtn');
+            btn.innerHTML = '<span class="loading"></span> Processing...';
+            btn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                btn.innerHTML = 'Confirm Order';
+                btn.disabled = false;
+                
+                // Show success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success-message';
+                successDiv.innerHTML = `
+                    <i class="fas fa-check-circle"></i> 
+                    Order confirmed! Your order ID is #${Math.floor(Math.random() * 10000)}<br>
+                    Payment method: ${payment}
+                `;
+                
+                const formCard = document.querySelector('#booking .form-card');
+                formCard.insertBefore(successDiv, formCard.firstChild);
+                
+                // Clear form
+                document.getElementById('fullName').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('delDate').value = '';
+                
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 5000);
+            }, 1500);
+        }
+
+        // Track order
+        function trackOrder() {
+            const orderId = event.target.previousElementSibling.value;
+            const resultDiv = document.getElementById('trackingResult');
+            
+            if (!orderId) {
+                resultDiv.innerHTML = '<p style="color:#ff4444;">Please enter an order ID</p>';
+                return;
+            }
+            
+            // Simulate tracking
+            resultDiv.innerHTML = '<p><span class="loading"></span> Tracking...</p>';
+            
+            setTimeout(() => {
+                const statuses = ['Processing', 'Packed', 'Out for delivery', 'Delivered'];
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                resultDiv.innerHTML = `
+                    <p style="color:#007c92;">
+                        <i class="fas fa-truck"></i> 
+                        Order #${orderId}: ${randomStatus}
+                    </p>
+                `;
+            }, 1000);
+        }
+
+        // Send contact message
+        function sendContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            const btn = document.getElementById('contactBtn');
+            btn.innerHTML = '<span class="loading"></span> Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Send Message';
+                btn.disabled = false;
+                
+                showNotification('Message sent successfully!');
+                
+                // Clear form
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactMessage').value = '';
+            }, 1000);
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+
+        // Page navigation
+        const sections = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('[data-page]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                sections.forEach(s => s.classList.remove('active-section'));
+                document.getElementById(pageId).classList.add('active-section');
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Close mobile menu
+                document.getElementById('navLinks').classList.remove('show');
+            });
+        });
+
+        // Set minimum date for booking
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('delDate').setAttribute('min', today);
+
+        // Event listeners for booking
+        document.getElementById('bookFishType').addEventListener('change', updateBookSum);
+        document.getElementById('bookQty').addEventListener('input', updateBookSum);
+        
+        // Initialize booking summary
+        updateBookSum();
+
+        // Close cart modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                hideCart();
+            }
+        }
+    </script>
+</body>
+</html>
