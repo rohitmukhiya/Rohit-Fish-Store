@@ -1,0 +1,26 @@
+CREATE TABLE users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+email VARCHAR(100) UNIQUE,
+password VARCHAR(255),
+role VARCHAR(20) DEFAULT 'user'
+);
+
+CREATE TABLE products (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+price INT,
+image VARCHAR(255)
+);
+
+CREATE TABLE orders (
+id INT AUTO_INCREMENT PRIMARY KEY,
+user_id INT,
+items TEXT,
+subtotal INT,
+delivery_charge INT,
+total INT,
+payment_method VARCHAR(50),
+status VARCHAR(50) DEFAULT 'Pending',
+order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
